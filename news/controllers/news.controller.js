@@ -18,22 +18,18 @@ let news = [
 ]
 
 const createNews = async (req, res) => {
-    console.log("Received request body:", req.body);
+    let {title,content,image} = req.body
 
-    if (!req.body) {
-        return res.status(400).json({ message: "Request body is missing." });
+    let data = {
+        title,
+        content,
+        image
     }
-
-    const { title, content } = req.body;
-
-    if (!title || !content) {
-        return res.status(400).json({ message: "Title and content are required." });
-    }
-
-    let data = req.body;
     news.push(data);
     res.status(201).json(data);
 };
+
+
 const getNews = async (req, res) => {
     res.json(news)
 }
@@ -41,12 +37,14 @@ const getNews = async (req, res) => {
 const getNewsById = async (req, res) => {
     let id = req.params.id
     res.json(news[id])
+
 }
 
 const deleteNewsById = async (req, res) => {
     let id = req.params.id
     news.splice(id, 1)
-    res.json(news)
+    res.status(204).send()
+ 
 }
 
 const updateNewsById = async (req, res) => {

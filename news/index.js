@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/news", newsRoute);
-app.get("/news",news)
+// app.get("/news",news)
 
 app.listen(PORT, () => {
     console.log("listening on port " + PORT);
