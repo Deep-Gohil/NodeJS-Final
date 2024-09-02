@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #courseList{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 20px;
+        }
+        #courseList div{
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="courseList"></div>
+</body>
+<script>
+    const API = async() =>{
+        let req = await fetch("http://localhost:3000/courses")
+        let res = await req.json()
+
+        console.log(res);
+        Mapper(res);
+    }
+    API()
+
+    const Mapper = (courses) => {
+        courses.map((ele)=>{
+            let div = document.createElement("div")
+
+            let name = document.createElement("h1")
+            name.innerHTML = ele.name
+
+            let category = document.createElement("h3")
+            category.innerHTML = ele.category
+
+            let instructions = document.createElement("h4")
+            instructions.innerHTML = ele.instructor
+
+            let duration = document.createElement("p")
+            duration.innerHTML = `Duration: ${ele.duration}`
+
+            div.append(name,category,instructions,duration)
+
+            document.getElementById("courseList").append(div)
+        })
+    }
+</script>
+</html>
