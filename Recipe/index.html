@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index File</title>
+    <style>
+        #parent{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+        }
+        #parent div{
+            border: 1px solid black;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        #parent img{
+            width: 20vw;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent"></div>
+</body>
+<script>
+    const API = async() =>{
+        let req = await fetch("http://localhost:8090/recipe/all")
+        let res = await req.json()
+        Mapper(res)
+    }
+    API()
+
+    const Mapper = (data) =>{
+        data.map((ele)=>{
+            let div = document.createElement("div")
+
+            let imageUrl = document.createElement("img")
+            imageUrl.src = ele.imageUrl
+
+            let name = document.createElement("h1")
+            name.innerHTML = ele.name
+
+            let description = document.createElement("h4")
+            description.innerHTML = ele.description
+
+            let country = document.createElement("h5")
+            country.innerHTML = `Country: ${ele.country}`
+
+            let cookingTime = document.createElement("h4")
+            cookingTime.innerHTML = `Cooking Time: ${ele.cookingTime} minutes`
+
+            div.append(imageUrl,name,description,country,cookingTime)
+
+            document.getElementById("parent").append(div)
+
+        })
+    }
+</script>
+</html>
