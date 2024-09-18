@@ -1,11 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        .Parent {
+            height: 90vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .innerForm {
+            border: 1px solid black;
+            height: 200px;
+            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="Parent">
+        <h1>Login</h1>
+        <div class="innerForm">
+            <form id="form">
+                <input type="email" placeholder="Enter Email Address" name="email" required id="email">
+                <br>
+                <br>
+                <input type="password" placeholder="Enter Password" name="password" required id="password">
+                <br>
+                <br>
+                <input type="submit">
+                <p id="message" class="error"></p>
+            </form>
+        </div>
+    </div>
 </body>
+
+<script>
+    const API = async () => {
+        let req = await fetch("http://localhost:8090/user")
+        let res = await req.json()
+        Mapper(res)
+    }
+
+    const Mapper = (data) => {
+        let currEmail = document.getElementById("email").value;
+        let currPass = document.getElementById("password").value;
+        let user = data.find(user => user.email === currEmail);
+
+        if (!user) {
+            alert("user not found");
+        }
+        else if (user.password !== currPass) {
+            alert("Incorrect password");
+        }
+        else {
+            alert("Login successful")
+            window.location.href = "http://127.0.0.1:5500/view/index.html"
+            localStorage.setItem("loggedUser", JSON.stringify(user)); 
+            localStorage.setItem("isLogged", true);
+
+        }
+    }
+
+    document.getElementById("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        API();
+    });
+</script>
+
 </html>

@@ -4,20 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
+    <style>
+        .Parent{
+            height: 90vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .innerForm{
+            border: 1px solid black;
+            height: 400px;
+            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-    <form action="http://localhost:8090/user" method="post">
-        <input type="text" placeholder="Enter Name" id="name" name="name">
-        <input type="number" placeholder="Enter GRID" id="grid" name="grid">
-        <input type="number" placeholder="Enter Number" id="number">
-        <input type="number" placeholder="Enter Age" id="age">
-        <select>
-            <option>Student</option>
-            <option>Teacher</option>
-        </select>
-        <input type="email" placeholder="Enter Email Address" id="email">
-        <input type="password" placeholder="Enter Password" id="password">
-        <input type="submit">
-    </form>
+    <div class="Parent">
+        <h1>Sign UP</h1>
+        <div class="innerForm">
+            <form action="http://localhost:8090/user" method="post">
+                <input type="text" placeholder="Enter Name" name="name" required>
+                <br>
+                <br>
+                <input type="number" placeholder="Enter GRID" name="grid" required>
+                <br>
+                <br>
+                <input type="number" placeholder="Enter Number" name="number" required>
+                <br>
+                <br>
+                <input type="number" placeholder="Enter Age" name="age" required>
+                <br>
+                <br>
+                <select name="role">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+                <br>
+                <br>
+                <input type="email" placeholder="Enter Email Address" name="email" required>
+                <br>
+                <br>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <br>
+                <br>
+                <input type="submit">
+            </form> 
+        </div>  
+    </div> 
 </body>
 </html>

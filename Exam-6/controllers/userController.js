@@ -8,7 +8,6 @@ const getUser = async(req,res) =>{
 const createUser = async(req,res) =>{
     let data = await User.create(req.body,{new:true})
     console.log(data);
-    
     res.send(data)
 }
 
