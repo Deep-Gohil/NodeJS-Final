@@ -2,7 +2,7 @@ const User = require("../model/userSchema")
 
 const getUsers = async (req, res) => {
     let data = await User.findOne()
-    res.res(data)
+    res.send(data)
 }
 
 const getUser = async (req, res) => {
