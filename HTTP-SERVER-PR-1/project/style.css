@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#title {
+    color: blue;
+    font-size: 2em;
+}
+
+#img {
+    width: 300px;
+    height: auto;
+    margin-top: 10px;
+}
+
+#grid {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#course {
+    display: block;
+    margin-top: 10px;
+    color: green;
+}
