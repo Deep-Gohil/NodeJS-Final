@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <style>
+        .parent{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 5%;
+        }
+        .container{
+            height: 100%;
+            width: 85%;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 5%;
+        }
+        .container div img{
+            width: 20vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="container">
+            
+        </div>
+    </div>
+</body>
+<script>
+    const API = async() =>{
+        let req = await fetch("http://localhost:8090/books/")
+        let res = await req.json();
+        mapper(res)
+    }
+
+    API()
+
+    const mapper = (data) =>{
+        data.map((ele)=>{
+            let div = document.createElement("div");
+
+            let image = document.createElement("img")
+            image.src = ele.imageUrl;
+            
+            let title = document.createElement("h1");
+            title.innerHTML = ele.title;
+
+            let price = document.createElement("h2")
+            price.innerHTML = ele.price;
+
+            let author = document.createElement("h5")
+            author.innerHTML = ele.author;
+
+            let category = document.createElement("h5")
+            category.innerHTML = ele.category
+
+            let publicationYear = document.createElement("h3")
+            publicationYear.innerHTML = `publication Year is ${ele.publicationYear}`
+
+            let quantity = document.createElement("h5")
+            quantity.innerHTML = `Quantity is ${ele.quantity}`
+
+            div.append(image,title,price,category,quantity,author,publicationYear)
+
+            document.querySelector(".container").append(div)
+        })
+    }
+</script>
+</html>
